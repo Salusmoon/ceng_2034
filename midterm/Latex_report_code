@@ -1,0 +1,122 @@
+\documentclass[onecolumn]{article}
+%\usepackage{url}
+%\usepackage{algorithmic}
+\usepackage[a4paper]{geometry}
+\usepackage{datetime}
+\usepackage[margin=2em, font=small,labelfont=it]{caption}
+\usepackage{graphicx}
+\usepackage{mathpazo} % use palatino
+\usepackage[scaled]{helvet} % helvetica
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{subfigure}
+% Letterspacing macros
+\newcommand{\spacecaps}[1]{\textls[200]{\MakeUppercase{#1}}}
+\newcommand{\spacesc}[1]{\textls[50]{\textsc{\MakeLowercase{#1}}}}
+
+\title{\spacecaps{Assignment Report 1: Process and Thread Implementation}\\ \normalsize \spacesc{CENG2034, Operating Systems} }
+
+\author{Berkcan Erguncu\\berkcanerguncu@mu.edu.tr}
+%\date{\today\\\currenttime}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\section{Introduction}
+
+With the opening of the computer, a lot of processes run in the background. Understanding these processes is of great importance in understanding the computer.
+
+In this lab, there is a study on the functioning of these processes. The main purpose of this lab is how processes occur and how they work in a computer with linux software.
+
+\section{Assignments}
+
+There are 4 required tasks in this lab. I used 5 libraries for these tasks. these libraries : \newline
+Os, time, sys, requests, threading.\newline
+I will talk about these four tasks in the following sections.
+
+
+
+
+\subsection{My Computer}
+
+
+\subsubsection*{CPU Information}
+
+Model : Intel(R) Core(TM) i7-4700MQ CPU @ 2.40GHz
+Core count: 4
+Thread count: 8
+
+\subsubsection*{Software Information}
+
+Operating system : Linux Mint 19.1 Tessa
+Kernel version : Linux  4.15.0-91-generic x86-64
+Python version : Python 3.7.3
+
+\subsection{PID of Script }
+
+Linux provides an PID number for each process. When we run the script, linux returns a PID on it for this process. The first thing to do is find this PID. Here we find it using the "os.getpid()" method from the "os" library.
+
+\subsection{"loadavg" Values }
+I also used the "os" library to reach the CPU average. This function is "os.getloadavg()".
+
+\subsection{Control CPU Usage and Exit Script for 5 min "loadavg" Value}
+
+The "loadavg" function gives us an average of 1, 5 and 15 minutes of CPU usage.(like this, os.loadavg() : (1.12, 0.98, 1.09)).Second value represents the 5-minute average. I
+created a variable for loadavg values(loadavg = os.getloadavg()). Then I created a another variable in the number of CPU(cpu =  os.cpucount()). Finally, if the value between the number of cpu and the rate of cpu usage is less than one, script stop.(if (cpu\_loadavg[1] < 1): sys.exit())
+ 
+ 
+ 
+\subsection{Check Links are Valid or not Valid with Using Threads}
+
+I used os , requests threading modules. We have an array that it has:\newline
+
+https://api.github.com/\newline
+http://bilgisayar.mu.edu.tr/\newline
+https://www.python.org/\newline
+http://akrepnalan.com/ceng2034\newline
+https://github.com/caesarsalad/wow\newline
+
+I created url\_ok() function for checks status code of website with using threading library.
+Then I created 5 thread for each website and I checked valid or not valid.\newline
+thread1 = threading.Thread(target =url\_ok, args = (urls[0], ))\newline
+thread1.start()\newline
+thread1.join()
+
+I used the perf\_counter () method to see how long after the threads finished this threads.
+
+
+\section{Results}
+
+\subsection{About PID}
+
+PID number gets a different number each time the scenario runs.Because linux assigns separate PID numbers for every processes.
+
+
+\subsection{About loadavg}
+
+The loadavg method gives us CPU usage in 1, 5 and 15 minute periods.
+
+loadavg : (1.02(1 minute), 0.81(5 minutes), 0.76(15 minutes)) 
+
+
+\subsection{Time Saving with Threads}
+
+Using thread greatly speeds up the processes. \newline
+It takes 1 to 3 seconds to check websites without using threads.\newline
+When using thread, it takes less than half a second.
+
+
+\section{Conclusion}
+To execute this project, every application on GNU / Linux creates new processes as files ("Everything is a file"). When you restart the application, the operating system creates a new process again.
+For this reason, the programmer should use these processes more efficiently. During this time
+threads are trying to help. It will be more effective to run at the same time when events occur
+independent from each other. Today we are in the computer age. So we need to understand
+How the operating system works because the world of computers continues to grow rapidly.
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
+
+
